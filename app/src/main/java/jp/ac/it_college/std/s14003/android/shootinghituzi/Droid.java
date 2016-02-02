@@ -9,7 +9,7 @@ import android.graphics.Rect;
 public class Droid extends BaseObject {
     private final Paint paint = new Paint();
     private final Bitmap bitmap;
-    private final Rect rect;
+    public final Rect rect;
 
     public Droid(Bitmap bitmap, int width, int height) {
         this.bitmap = bitmap;
@@ -21,12 +21,26 @@ public class Droid extends BaseObject {
         rect = new Rect(left, top, right, bottom);
 
         yPosition = rect.centerY();
-        xPosotion = rect.centerX();
+        xPosition = rect.centerX();
+    }
+
+    @Override
+    public Type getType() {
+        return Type.Droid;
+    }
+
+    @Override
+    public boolean isHit(BaseObject object) {
+        return object.getType() == Type.Missile && rect.contains(Math.round(object.xPosition),
+                Math.round(object.yPosition));
+
     }
 
     @Override
     public void draw(Canvas canvas) {
-        canvas.drawBitmap(bitmap, rect.left, rect.top, paint);
+        if (status == STATUS_NORMAL) {
+            canvas.drawBitmap(bitmap, rect.left, rect.top, paint );
+        }
     }
 
     @Override

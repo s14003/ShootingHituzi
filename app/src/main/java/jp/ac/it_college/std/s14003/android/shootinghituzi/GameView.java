@@ -5,7 +5,10 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.Color;
+import android.graphics.Paint;
+import android.os.Handler;
 import android.util.Log;
+import android.view.MotionEvent;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
 
@@ -15,11 +18,20 @@ import java.util.Random;
 
 
 public class GameView extends SurfaceView implements SurfaceHolder.Callback {
+    private String TAG = "GameView";
     private Droid droid;
+    private final List<BaseObject> bulletList = new ArrayList<>();
     private static final int MISSILE_LAUNCH_WEIGHT = 50;
     private final Random random = new Random();
     private final List<BaseObject> missileList = new ArrayList<>();
     private static final long FPS = 60;
+    private Handler handler;
+    private static final float SCORE_TEXT_SIZE = 50.0f;
+    private final Paint paint = new Paint();
+    private long score;
+    private Callback callback;
+    private int num = 10;
+
 
     private class DrawThread extends Thread {
         boolean isFinished;
@@ -66,6 +78,12 @@ public class GameView extends SurfaceView implements SurfaceHolder.Callback {
     public GameView(Context context) {
         super(context);
         getHolder().addCallback(this);
+
+        handler = new Handler();
+
+        paint.setColor(Color.BLACK);
+        paint.setTextSize(SCORE_TEXT_SIZE);
+        paint.setAntiAlias(true);
     }
 
     private void drawGame(Canvas canvas) {
@@ -81,12 +99,43 @@ public class GameView extends SurfaceView implements SurfaceHolder.Callback {
         }
 
         drawObjectList(canvas, missileList, width, height);
-        
+        drawObjectList(canvas, bulletList, width, height);
+
+        for (int i = 0; i < missileList.size(); i++) {
+            BaseObject missile = missileList.get(i);
+            for (int j = 0; j < bulletList.size(); j++) {
+                BaseObject bullet = bulletList.get(j);
+                if (bullet.isHit(missile)) {
+                    Log.d(TAG, "missile bullet is hit");
+                    missile.hit();
+                    bullet.hit();
+                    score += num;
+                }
+            }
+        }
+
+        for (int i = 0; i < missileList.size(); i++) {
+            BaseObject missile = missileList.get(i);
+            if (droid.isHit(missile)) {
+                Log.d(TAG, "droid hit");
+                missile.hit();
+                droid.hit();
+                handler.post(new Runnable() {
+                    @Override
+                    public void run() {
+                        callback.onGameOver(score);
+                    }
+                });
+                break;
+            }
+        }
         if (random.nextInt(MISSILE_LAUNCH_WEIGHT) == 0) {
 
                 launchMissile();
         }
+
         droid.draw(canvas);
+        canvas.drawText("Score:" + score, 0, SCORE_TEXT_SIZE, paint);
 
     }
 
@@ -118,6 +167,30 @@ public class GameView extends SurfaceView implements SurfaceHolder.Callback {
     }
 
     @Override
+    public boolean onTouchEvent(MotionEvent event) {
+        switch (event.getAction()) {
+            case MotionEvent.ACTION_DOWN:
+                fire(event.getY(),event.getX());
+                break;
+        }
+        return super.onTouchEvent(event);
+    }
+    private void fire(float y, float x) {
+        float alignX = (x - droid.rect.centerX()) / Math.abs(y - droid.rect.centerY());
+        Bitmap BulletBitmap = BitmapFactory.decodeResource(getResources(),R.drawable.inukyuu);
+        Bullet bullet = new Bullet(BulletBitmap, alignX, droid.rect);
+        bulletList.add(0, bullet);
+    }
+
+    public interface Callback {
+        void onGameOver (long score);
+    }
+
+    public void setCallback(Callback callback) {
+        this.callback = callback;
+    }
+
+    @Override
     public void surfaceCreated(SurfaceHolder holder) {
         startDrawThread();
     }
@@ -126,7 +199,6 @@ public class GameView extends SurfaceView implements SurfaceHolder.Callback {
     public void surfaceChanged(SurfaceHolder holder, int format, int width, int height) {
 
     }
-
     @Override
     public void surfaceDestroyed(SurfaceHolder holder) {
         stopDrawThread();
