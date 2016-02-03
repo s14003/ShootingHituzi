@@ -19,7 +19,7 @@ public class Droid extends BaseObject {
         int left = (width - bitmap.getWidth()) / 2;
         int top = height - bitmap.getHeight();
         int right = left + bitmap.getWidth();
-        int bottom = height + bitmap.getHeight();
+        int bottom = top + bitmap.getHeight();
         rect = new Rect(left, top, right, bottom);
 
         yPosition = rect.centerY();
