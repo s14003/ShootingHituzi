@@ -33,16 +33,17 @@ public class Droid extends BaseObject {
 
     @Override
     public boolean isHit(BaseObject object) {
-        if (object.getType() != Type.Missile) {
-            return false;
+        if (object.getType() == Type.Missile) {
+            if (status == STATUS_DESTROYED) {
+                Log.d(TAG, "STATUS_DESTROYED True");
+                return false;
+            } else {
+                Log.d(TAG, "droid is hit!!");
+                return rect.contains(Math.round(object.xPosition), Math.round(object.yPosition));
+            }
         }
-        if (status == STATUS_DESTROYED) {
-            Log.d(TAG, "STATUS_DESTROYED True");
-            return false;
-        } else {
-            Log.d(TAG, "droid is hit!!");
-            return rect.contains(Math.round(object.xPosition), Math.round(object.yPosition));
-        }
+        return false;
+
     }
 
     @Override

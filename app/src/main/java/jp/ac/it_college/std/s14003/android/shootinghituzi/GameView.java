@@ -18,6 +18,7 @@ import java.util.Random;
 
 
 public class GameView extends SurfaceView implements SurfaceHolder.Callback {
+    private static final long SCORE_LEVEL = 100;
     private String TAG = "GameView";
     private Droid droid;
     private final List<BaseObject> bulletList = new ArrayList<>();
@@ -128,7 +129,10 @@ public class GameView extends SurfaceView implements SurfaceHolder.Callback {
             }
         }
         if (random.nextInt(MISSILE_LAUNCH_WEIGHT) == 0) {
+            long count = score / SCORE_LEVEL + 1;
+            for (int i = 0; i < count; i++) {
                 launchMissile();
+            }
         }
 
         droid.draw(canvas);
@@ -143,7 +147,7 @@ public class GameView extends SurfaceView implements SurfaceHolder.Callback {
         float alignX = (toX - fromX) / (float) getHeight();
 
         Bitmap MissileBitmap =
-                BitmapFactory.decodeResource(getResources(), R.drawable.hituzinekokai);
+                BitmapFactory.decodeResource(getResources(), R.drawable.inukyuu);
         //noinspection SuspiciousNameCombination
         Missile missile = new Missile(MissileBitmap, fromX, alignX);
         missileList.add(missile);

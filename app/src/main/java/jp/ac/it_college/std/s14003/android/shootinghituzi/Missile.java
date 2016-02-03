@@ -38,7 +38,7 @@ public class Missile extends BaseObject {
             Log.d(TAG,"STATUS_DESTROYED True");
             return false;
         } else {
-            Log.d(TAG, "Type.Missile is false");
+            Log.d(TAG, "Type.Missile is clash!!");
             return (calcDistance(this, object) < SIZE);
         }
     }
