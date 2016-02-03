@@ -14,10 +14,10 @@ public class Missile extends BaseObject {
     public final float alignX;
     private Rect rect;
 
-    public Missile(Bitmap bitmap, int height, float alignX) {
+    public Missile(Bitmap bitmap, int fromX, float alignX) {
         this.bitmap = bitmap;
         yPosition = 0;
-        xPosition = height;
+        xPosition = fromX;
         this.alignX = alignX;
 
     }

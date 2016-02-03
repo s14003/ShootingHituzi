@@ -128,7 +128,6 @@ public class GameView extends SurfaceView implements SurfaceHolder.Callback {
             }
         }
         if (random.nextInt(MISSILE_LAUNCH_WEIGHT) == 0) {
-
                 launchMissile();
         }
 
@@ -144,7 +143,7 @@ public class GameView extends SurfaceView implements SurfaceHolder.Callback {
         float alignX = (toX - fromX) / (float) getHeight();
 
         Bitmap MissileBitmap =
-                BitmapFactory.decodeResource(getResources(), R.drawable.inukyuu);
+                BitmapFactory.decodeResource(getResources(), R.drawable.hituzinekokai);
         //noinspection SuspiciousNameCombination
         Missile missile = new Missile(MissileBitmap, fromX, alignX);
         missileList.add(missile);
