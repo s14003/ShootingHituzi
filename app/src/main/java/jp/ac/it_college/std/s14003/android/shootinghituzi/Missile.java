@@ -15,7 +15,6 @@ public class Missile extends BaseObject {
     public Missile(Bitmap bitmap, int height, float alignX) {
         this.bitmap = bitmap;
         yPosition = 0;
-        //noinspection SuspiciousNameCombination
         xPosition = height;
         this.alignX = alignX;
 
@@ -31,7 +30,10 @@ public class Missile extends BaseObject {
         if (object.getType() == Type.Missile) {
             return false;
         }
-        return (calcDistance(this, object) < SIZE);
+        //1回でもあたったらfalseを返す
+
+            return (calcDistance(this, object) < SIZE);
+        
     }
 
     @Override

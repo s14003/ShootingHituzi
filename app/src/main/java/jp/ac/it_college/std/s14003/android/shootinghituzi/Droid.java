@@ -31,9 +31,10 @@ public class Droid extends BaseObject {
 
     @Override
     public boolean isHit(BaseObject object) {
-        return object.getType() == Type.Missile && rect.contains(Math.round(object.xPosition),
-                Math.round(object.yPosition));
-
+        if (object.getType() != Type.Missile) {
+            return false;
+        }
+        return rect.contains(Math.round(object.xPosition),Math.round(object.yPosition));
     }
 
     @Override

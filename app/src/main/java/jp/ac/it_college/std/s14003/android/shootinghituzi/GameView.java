@@ -21,9 +21,9 @@ public class GameView extends SurfaceView implements SurfaceHolder.Callback {
     private String TAG = "GameView";
     private Droid droid;
     private final List<BaseObject> bulletList = new ArrayList<>();
+    private final List<BaseObject> missileList = new ArrayList<>();
     private static final int MISSILE_LAUNCH_WEIGHT = 50;
     private final Random random = new Random();
-    private final List<BaseObject> missileList = new ArrayList<>();
     private static final long FPS = 60;
     private Handler handler;
     private static final float SCORE_TEXT_SIZE = 50.0f;
@@ -77,13 +77,12 @@ public class GameView extends SurfaceView implements SurfaceHolder.Callback {
 
     public GameView(Context context) {
         super(context);
-        getHolder().addCallback(this);
-
-        handler = new Handler();
 
         paint.setColor(Color.BLACK);
         paint.setTextSize(SCORE_TEXT_SIZE);
         paint.setAntiAlias(true);
+        handler = new Handler();
+        getHolder().addCallback(this);
     }
 
     private void drawGame(Canvas canvas) {
@@ -105,11 +104,11 @@ public class GameView extends SurfaceView implements SurfaceHolder.Callback {
             BaseObject missile = missileList.get(i);
             for (int j = 0; j < bulletList.size(); j++) {
                 BaseObject bullet = bulletList.get(j);
+
                 if (bullet.isHit(missile)) {
-                    Log.d(TAG, "missile bullet is hit");
                     missile.hit();
                     bullet.hit();
-                    score += num;
+                    score += 10;
                 }
             }
         }
@@ -117,9 +116,9 @@ public class GameView extends SurfaceView implements SurfaceHolder.Callback {
         for (int i = 0; i < missileList.size(); i++) {
             BaseObject missile = missileList.get(i);
             if (droid.isHit(missile)) {
-                Log.d(TAG, "droid hit");
                 missile.hit();
                 droid.hit();
+
                 handler.post(new Runnable() {
                     @Override
                     public void run() {
@@ -177,8 +176,8 @@ public class GameView extends SurfaceView implements SurfaceHolder.Callback {
     }
     private void fire(float y, float x) {
         float alignX = (x - droid.rect.centerX()) / Math.abs(y - droid.rect.centerY());
-        Bitmap BulletBitmap = BitmapFactory.decodeResource(getResources(),R.drawable.inukyuu);
-        Bullet bullet = new Bullet(BulletBitmap, alignX, droid.rect);
+
+        Bullet bullet = new Bullet(alignX, droid.rect);
         bulletList.add(0, bullet);
     }
 

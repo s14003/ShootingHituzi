@@ -1,7 +1,7 @@
 package jp.ac.it_college.std.s14003.android.shootinghituzi;
 
-import android.graphics.Bitmap;
 import android.graphics.Canvas;
+import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.Rect;
 
@@ -10,14 +10,12 @@ public class Bullet extends BaseObject {
     private static final float SIZE = 15f;
     public final float alignX;
     private final Paint paint = new Paint();
-    private final Bitmap bitmap;
-    private Rect rect;
 
-    Bullet(Bitmap bitmap,float alignX, Rect rect) {
-        this.bitmap = bitmap;
+    Bullet(float alignX, Rect rect) {
         this.alignX = alignX;
         yPosition = rect.centerY();
         xPosition = rect.centerX();
+        paint.setColor(Color.RED);
     }
 
     @Override
@@ -27,7 +25,10 @@ public class Bullet extends BaseObject {
 
     @Override
     public boolean isHit(BaseObject object) {
-        return object.getType() == Type.Missile && (calcDistance(this, object) < SIZE);
+        if (object.getType() != Type.Missile) {
+            return false;
+        }
+        return (calcDistance(this, object) < SIZE);
     }
 
     @Override

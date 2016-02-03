@@ -21,4 +21,16 @@ public class MainActivity extends AppCompatActivity implements GameView.Callback
         Toast.makeText(this, "Game Over スコア" + score, Toast.LENGTH_LONG).show();
 
     }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        gameView.startDrawThread();
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        gameView.stopDrawThread();
+    }
 }
