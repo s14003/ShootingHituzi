@@ -4,9 +4,11 @@ import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.Paint;
 import android.graphics.Rect;
+import android.util.Log;
 
 
 public class Droid extends BaseObject {
+    private final String TAG = "Droid";
     private final Paint paint = new Paint();
     private final Bitmap bitmap;
     public final Rect rect;
@@ -34,7 +36,13 @@ public class Droid extends BaseObject {
         if (object.getType() != Type.Missile) {
             return false;
         }
-        return rect.contains(Math.round(object.xPosition),Math.round(object.yPosition));
+        if (status == STATUS_DESTROYED) {
+            Log.d(TAG, "STATUS_DESTROYED True");
+            return false;
+        } else {
+            Log.d(TAG, "droid is hit!!");
+            return rect.contains(Math.round(object.xPosition), Math.round(object.yPosition));
+        }
     }
 
     @Override

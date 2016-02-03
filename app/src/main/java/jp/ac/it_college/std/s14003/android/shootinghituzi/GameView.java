@@ -47,7 +47,6 @@ public class GameView extends SurfaceView implements SurfaceHolder.Callback {
                     drawGame(canvas);
                     holder.unlockCanvasAndPost(canvas);
                 }
-
                 try {
                     sleep(1000 / FPS);
                 } catch (InterruptedException e) {
@@ -93,7 +92,7 @@ public class GameView extends SurfaceView implements SurfaceHolder.Callback {
         canvas.drawColor(Color.WHITE);
         if (droid == null) {
             Bitmap DroidBitmap =
-                    BitmapFactory.decodeResource(getResources(),R.drawable.hitujiinu);
+                    BitmapFactory.decodeResource(getResources(),R.drawable.hitujiback);
             droid = new Droid(DroidBitmap, width, height);
         }
 
@@ -105,7 +104,7 @@ public class GameView extends SurfaceView implements SurfaceHolder.Callback {
             for (int j = 0; j < bulletList.size(); j++) {
                 BaseObject bullet = bulletList.get(j);
 
-                if (bullet.isHit(missile)) {
+                if (missile.isHit(bullet)) {
                     missile.hit();
                     bullet.hit();
                     score += 10;
@@ -115,7 +114,7 @@ public class GameView extends SurfaceView implements SurfaceHolder.Callback {
 
         for (int i = 0; i < missileList.size(); i++) {
             BaseObject missile = missileList.get(i);
-            if (droid.isHit(missile)) {
+            if (missile.isHit(droid)) {
                 missile.hit();
                 droid.hit();
 

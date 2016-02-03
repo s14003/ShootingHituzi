@@ -4,9 +4,11 @@ import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.Rect;
+import android.util.Log;
 
 
 public class Bullet extends BaseObject {
+    private static final String TAG = "Bullet";
     private static final float SIZE = 15f;
     public final float alignX;
     private final Paint paint = new Paint();
@@ -28,6 +30,7 @@ public class Bullet extends BaseObject {
         if (object.getType() != Type.Missile) {
             return false;
         }
+        Log.d(TAG,"Bullet is hit!!!");
         return (calcDistance(this, object) < SIZE);
     }
 
