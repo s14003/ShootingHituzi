@@ -1,11 +1,13 @@
 package jp.ac.it_college.std.s14003.android.shootinghituzi;
 
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
+import android.graphics.Rect;
 import android.os.Handler;
 import android.util.Log;
 import android.view.MotionEvent;
@@ -18,6 +20,7 @@ import java.util.Random;
 
 
 public class GameView extends SurfaceView implements SurfaceHolder.Callback {
+
     private static final long SCORE_LEVEL = 100;
     private String TAG = "GameView";
     private Droid droid;
@@ -32,11 +35,10 @@ public class GameView extends SurfaceView implements SurfaceHolder.Callback {
     private long score;
     private Callback callback;
     private int num = 10;
-
+    private Intent intent = new Intent();
 
     private class DrawThread extends Thread {
         boolean isFinished;
-
         @Override
         public void run() {
             SurfaceHolder holder = getHolder();
@@ -118,11 +120,11 @@ public class GameView extends SurfaceView implements SurfaceHolder.Callback {
             if (missile.isHit(droid)) {
                 missile.hit();
                 droid.hit();
-
                 handler.post(new Runnable() {
                     @Override
                     public void run() {
                         callback.onGameOver(score);
+
                     }
                 });
                 break;
@@ -137,7 +139,6 @@ public class GameView extends SurfaceView implements SurfaceHolder.Callback {
 
         droid.draw(canvas);
         canvas.drawText("Score:" + score, 0, SCORE_TEXT_SIZE, paint);
-
     }
 
     private void launchMissile() {
@@ -178,7 +179,6 @@ public class GameView extends SurfaceView implements SurfaceHolder.Callback {
     }
     private void fire(float y, float x) {
         float alignX = (x - droid.rect.centerX()) / Math.abs(y - droid.rect.centerY());
-
         Bullet bullet = new Bullet(alignX, droid.rect);
         bulletList.add(0, bullet);
     }

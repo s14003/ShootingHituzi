@@ -4,10 +4,8 @@ import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.Paint;
 import android.graphics.Rect;
-import android.util.Log;
 
 public class Missile extends BaseObject {
-    private static final String TAG = "Missile";
     private static final float SIZE = 10f;
     private final Paint paint = new Paint();
     public final Bitmap bitmap;
@@ -30,15 +28,12 @@ public class Missile extends BaseObject {
     @Override
     public boolean isHit(BaseObject object) {
         if (object.getType() == Type.Missile) {
-            Log.d(TAG,"Type.Missile is True!");
             return false;
         }
 
         if (status == STATUS_DESTROYED) {
-            Log.d(TAG,"STATUS_DESTROYED True");
             return false;
         } else {
-            Log.d(TAG, "Type.Missile is clash!!");
             return (calcDistance(this, object) < SIZE);
         }
     }
