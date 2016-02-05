@@ -1,13 +1,11 @@
 package jp.ac.it_college.std.s14003.android.shootinghituzi;
 
 import android.content.Context;
-import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
-import android.graphics.Rect;
 import android.os.Handler;
 import android.util.Log;
 import android.view.MotionEvent;
@@ -22,7 +20,6 @@ import java.util.Random;
 public class GameView extends SurfaceView implements SurfaceHolder.Callback {
 
     private static final long SCORE_LEVEL = 100;
-    private String TAG = "GameView";
     private Droid droid;
     private final List<BaseObject> bulletList = new ArrayList<>();
     private final List<BaseObject> missileList = new ArrayList<>();
@@ -35,7 +32,6 @@ public class GameView extends SurfaceView implements SurfaceHolder.Callback {
     private long score;
     private Callback callback;
     private int num = 10;
-    private Intent intent = new Intent();
 
     private class DrawThread extends Thread {
         boolean isFinished;
@@ -130,6 +126,8 @@ public class GameView extends SurfaceView implements SurfaceHolder.Callback {
                 break;
             }
         }
+
+        //難易度
         if (random.nextInt(MISSILE_LAUNCH_WEIGHT) == 0) {
             long count = score / SCORE_LEVEL + 1;
             for (int i = 0; i < count; i++) {

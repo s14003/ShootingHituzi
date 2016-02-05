@@ -18,6 +18,7 @@ public class MainActivity extends AppCompatActivity implements GameView.Callback
 
     @Override
     public void onGameOver(long score) {
+        //SharedPreferencesにスコアを保存させる
         gameView.stopDrawThread();
         Toast.makeText(this, "Game Over スコア" + score, Toast.LENGTH_LONG).show();
         Intent it = new Intent(this, Result.class);
