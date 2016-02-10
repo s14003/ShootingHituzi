@@ -120,7 +120,6 @@ public class GameView extends SurfaceView implements SurfaceHolder.Callback {
                     @Override
                     public void run() {
                         callback.onGameOver(score);
-
                     }
                 });
                 break;
@@ -201,5 +200,6 @@ public class GameView extends SurfaceView implements SurfaceHolder.Callback {
     @Override
     public void surfaceDestroyed(SurfaceHolder holder) {
         stopDrawThread();
+
     }
 }

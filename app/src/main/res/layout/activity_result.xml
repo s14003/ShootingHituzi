@@ -11,14 +11,71 @@
 
     </LinearLayout>
 
-    <TextView
-        android:layout_width="215dp"
+    <TableLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="Result"
-        android:id="@+id/result_View"
-        android:layout_gravity="center_horizontal"
-        android:layout_weight="0.05"
-        android:textSize="20dp" />
+        android:layout_weight="0.90">
+
+
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+        </TableRow>
+
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:text="Result"
+                android:id="@+id/result_View"
+                android:textSize="50dp"
+                android:layout_column="29"
+                android:layout_gravity="center_horizontal" />
+        </TableRow>
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+        </TableRow>
+
+
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:text="@string/score"
+                android:id="@+id/score"
+                android:layout_gravity="center_horizontal"
+                android:textSize="50sp"
+                android:layout_column="37" />
+        </TableRow>
+
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/home"
+                android:id="@+id/back_button"
+                android:layout_column="42" />
+        </TableRow>
+    </TableLayout>
+
 
 </LinearLayout>
