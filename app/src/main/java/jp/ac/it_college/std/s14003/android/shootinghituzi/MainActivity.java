@@ -12,6 +12,8 @@ public class MainActivity extends AppCompatActivity
     private GameView gameView;
     private Button button;
     private Button BackButton;
+    private TapGame tapGame;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -24,9 +26,6 @@ public class MainActivity extends AppCompatActivity
         button.setOnClickListener(this);
         BackButton = (Button)findViewById(R.id.back_button);
         button.setOnClickListener(this);
-
-
-
 
     }
 
@@ -46,11 +45,8 @@ public class MainActivity extends AppCompatActivity
     @Override
     public void onClick(View v) {
         if (button == v) {
-            gameView = new GameView(this);
-            gameView.setCallback(this);
-            setContentView(gameView);
-        } if (BackButton == v) {
-            finish();
+            tapGame = new TapGame(this);
+            setContentView(tapGame);
         }
     }
 }

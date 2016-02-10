@@ -12,6 +12,8 @@ import android.widget.TextView;
 public class Result extends AppCompatActivity implements View.OnClickListener {
 //GameViewのスコアをSharedPreferencesに保存して取得。
     private Button button;
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

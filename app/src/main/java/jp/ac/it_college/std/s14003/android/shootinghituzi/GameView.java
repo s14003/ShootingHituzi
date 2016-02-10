@@ -32,6 +32,8 @@ public class GameView extends SurfaceView implements SurfaceHolder.Callback {
     private long score;
     private Callback callback;
     private int num = 10;
+    private DrawThread drawThread;
+
 
     private class DrawThread extends Thread {
         boolean isFinished;
@@ -55,7 +57,6 @@ public class GameView extends SurfaceView implements SurfaceHolder.Callback {
         }
     }
 
-    private DrawThread drawThread;
 
     public void startDrawThread() {
         stopDrawThread();
@@ -200,6 +201,5 @@ public class GameView extends SurfaceView implements SurfaceHolder.Callback {
     @Override
     public void surfaceDestroyed(SurfaceHolder holder) {
         stopDrawThread();
-
     }
 }

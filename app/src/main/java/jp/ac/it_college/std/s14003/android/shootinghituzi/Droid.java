@@ -2,6 +2,7 @@ package jp.ac.it_college.std.s14003.android.shootinghituzi;
 
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
+import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.Rect;
 import android.util.Log;
@@ -24,6 +25,7 @@ public class Droid extends BaseObject {
 
         yPosition = rect.centerY();
         xPosition = rect.centerX();
+        paint.setColor(Color.RED);
     }
 
     @Override
