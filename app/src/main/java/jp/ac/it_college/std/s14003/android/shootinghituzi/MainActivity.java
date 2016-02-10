@@ -45,8 +45,8 @@ public class MainActivity extends AppCompatActivity
     @Override
     public void onClick(View v) {
         if (button == v) {
-            tapGame = new TapGame(this);
-            setContentView(tapGame);
+            Intent it = new Intent(this, TapGame.class);
+            startActivity(it);
         }
     }
 }
