@@ -11,7 +11,6 @@ public class MainActivity extends AppCompatActivity
         implements GameView.Callback, View.OnClickListener {
     private GameView gameView;
     private Button button;
-    private Button BackButton;
     private TapGame tapGame;
 
 
@@ -24,8 +23,7 @@ public class MainActivity extends AppCompatActivity
 
         button = (Button)findViewById(R.id.button);
         button.setOnClickListener(this);
-        BackButton = (Button)findViewById(R.id.back_button);
-        button.setOnClickListener(this);
+
 
     }
 
