@@ -6,11 +6,31 @@
     <ProgressBar
         style="?android:attr/progressBarStyleHorizontal"
         android:layout_width="match_parent"
-        android:layout_height="0dp"
+        android:layout_height="wrap_content"
         android:id="@+id/progressBar"
         android:max="2000"
-        android:indeterminate="false"
-        android:layout_weight="0.06" />
+        android:indeterminate="false" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="36dp"
+        android:text="@string/tap_button"
+        android:id="@+id/choice_Button"
+        android:layout_gravity="right" />
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="fill_parent"
+            android:id="@+id/imageView"
+            android:layout_gravity="center_horizontal"
+            android:layout_weight="0.06"
+            />
+    </LinearLayout>
 
 
 </LinearLayout>
