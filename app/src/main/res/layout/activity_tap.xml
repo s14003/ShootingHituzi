@@ -7,7 +7,7 @@
         style="?android:attr/progressBarStyleHorizontal"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/progressBar"
+        android:id="@+id/exp_Bar"
         android:max="2000"
         android:indeterminate="false" />
 
@@ -26,10 +26,8 @@
         <ImageView
             android:layout_width="wrap_content"
             android:layout_height="fill_parent"
-            android:id="@+id/imageView"
-            android:layout_gravity="center_horizontal"
-            android:layout_weight="0.06"
-            />
+            android:id="@+id/Hituzi_Button"
+            android:layout_gravity="center_horizontal" />
     </LinearLayout>
 
 
