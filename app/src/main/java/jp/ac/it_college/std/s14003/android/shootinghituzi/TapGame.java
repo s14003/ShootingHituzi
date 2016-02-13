@@ -1,8 +1,10 @@
 package jp.ac.it_college.std.s14003.android.shootinghituzi;
 
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.media.Image;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
@@ -18,6 +20,8 @@ public class TapGame extends AppCompatActivity implements View.OnClickListener {
     private Bitmap inu;
     private int exp = 5;
     private ImageView iv;
+    private ImageView back;
+    private Bitmap background;
     private ProgressBar progressBar;
     private Button button;
     int Exp;
@@ -74,6 +78,10 @@ public class TapGame extends AppCompatActivity implements View.OnClickListener {
 
             progressBar.setProgress(Exp);
 
+
+        } else if (button == v) {
+            Intent it = new Intent(this, Choice.class);
+            startActivity(it);
 
         }
     }

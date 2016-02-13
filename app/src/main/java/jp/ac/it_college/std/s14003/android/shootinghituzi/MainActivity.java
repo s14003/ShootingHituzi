@@ -7,9 +7,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 
-public class MainActivity extends AppCompatActivity
-        implements GameView.Callback, View.OnClickListener {
-    private GameView gameView;
+public class MainActivity extends AppCompatActivity implements View.OnClickListener {
     private Button button;
     private TapGame tapGame;
 
@@ -26,7 +24,7 @@ public class MainActivity extends AppCompatActivity
 
 
     }
-
+/*
     @Override
     public void onGameOver(long score) {
         //SharedPreferencesにスコアを保存させる
@@ -39,6 +37,7 @@ public class MainActivity extends AppCompatActivity
         Intent it = new Intent(this, Result.class);
         startActivity(it);
     }
+    */
 
     @Override
     public void onClick(View v) {

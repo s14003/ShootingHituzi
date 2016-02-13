@@ -1,13 +1,14 @@
 package jp.ac.it_college.std.s14003.android.shootinghituzi;
 
 
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
 
-public class Choice extends AppCompatActivity implements View.OnClickListener {
+public class Choice extends AppCompatActivity implements View.OnClickListener,GameView.Callback {
     private GameView gameView;
     private Button maxButton;
     private Button normalButton;
@@ -35,6 +36,7 @@ public class Choice extends AppCompatActivity implements View.OnClickListener {
         if (maxButton == v) {
             gameView = new GameView(this);
             setContentView(gameView);
+            gameView.setCallback(this);
             SharedPreferences preferences = getSharedPreferences("LevelData", MODE_PRIVATE);
             SharedPreferences.Editor editor = preferences.edit();
             editor.putInt("MaxData", 100).apply();
@@ -42,6 +44,7 @@ public class Choice extends AppCompatActivity implements View.OnClickListener {
         } else if (normalButton == v) {
             gameView = new GameView(this);
             setContentView(gameView);
+            gameView.setCallback(this);
             SharedPreferences preferences = getSharedPreferences("LevelData", MODE_PRIVATE);
             SharedPreferences.Editor editor = preferences.edit();
             editor.putInt("NormalData", 50).apply();
@@ -49,9 +52,23 @@ public class Choice extends AppCompatActivity implements View.OnClickListener {
         } else if (easyButton == v) {
             gameView = new GameView(this);
             setContentView(gameView);
+            gameView.setCallback(this);
             SharedPreferences preferences = getSharedPreferences("LevelData", MODE_PRIVATE);
             SharedPreferences.Editor editor = preferences.edit();
             editor.putInt("MaxData", 25).apply();
         }
+    }
+
+    @Override
+    public void onGameOver(long score) {
+        //SharedPreferencesにスコアを保存させる
+        gameView.stopDrawThread();
+        //Toast.makeText(this, "Game Over スコア" + score, Toast.LENGTH_LONG).show();
+
+        SharedPreferences data = getSharedPreferences("NewData", MODE_PRIVATE);
+        SharedPreferences.Editor editor = data.edit();
+        editor.putLong("ScoreData", score).apply();
+        Intent it = new Intent(this, Result.class);
+        startActivity(it);
     }
 }

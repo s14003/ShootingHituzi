@@ -92,7 +92,7 @@ public class GameView extends SurfaceView implements SurfaceHolder.Callback {
         canvas.drawColor(Color.WHITE);
         if (droid == null) {
             Bitmap DroidBitmap =
-                    BitmapFactory.decodeResource(getResources(),R.drawable.hitujiback);
+                    BitmapFactory.decodeResource(getResources(),R.drawable.gameinu);
             droid = new Droid(DroidBitmap, width, height);
         }
 
