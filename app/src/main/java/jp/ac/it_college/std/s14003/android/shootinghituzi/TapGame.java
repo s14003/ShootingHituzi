@@ -4,7 +4,6 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.media.Image;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
@@ -15,39 +14,51 @@ import android.widget.ProgressBar;
 
 
 public class TapGame extends AppCompatActivity implements View.OnClickListener {
-
-    private final String TAG = "TapGame";
+    String TAG = "TapGame";
+    int Exp;
+    int Max = 500;
     private Bitmap inu;
-    private int exp = 5;
     private ImageView iv;
     private ImageView back;
     private Bitmap background;
     private ProgressBar progressBar;
     private Button button;
-    int Exp;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_tap);
 
-        inu = BitmapFactory.decodeResource(getResources(),R.drawable.hitujikids);
-        iv = (ImageView)findViewById(R.id.Hituzi_Button);
-        iv.setImageBitmap(inu);
-        iv.setOnClickListener(this);
 
-        button = (Button)findViewById(R.id.choice_Button);
+
+        button = (Button) findViewById(R.id.choice_Button);
         button.setOnClickListener(this);
 
         progressBar = (ProgressBar) findViewById(R.id.exp_Bar);
 
-        progressBar.setMax(5000);
+        progressBar.setMax(Max);
 
         SharedPreferences prefe = getSharedPreferences("ExpData", MODE_PRIVATE);
         Exp = prefe.getInt("ExpAdd", Exp);
 
         progressBar.setProgress(Exp);
 
+
+        if (Exp <= Max) {
+            Log.d(TAG,"Exp != Max");
+            inu = BitmapFactory.decodeResource(getResources(), R.drawable.tapkitty);
+            iv = (ImageView) findViewById(R.id.Hitsuzi_Button);
+            iv.setImageBitmap(inu);
+
+            iv.setOnClickListener(this);
+        }else {
+            Log.d(TAG,"Exp == Max");
+            inu = BitmapFactory.decodeResource(getResources(), R.drawable.tapbig);
+            iv = (ImageView) findViewById(R.id.Hitsuzi_Button);
+            iv.setImageBitmap(inu);
+
+            iv.setOnClickListener(this);
+        }
 
 
     }
@@ -69,7 +80,6 @@ public class TapGame extends AppCompatActivity implements View.OnClickListener {
             SharedPreferences.Editor edit = preferences.edit();
             edit.putInt("ExpAdd", Exp).apply();
             Log.d(TAG, "Total Exp :" + Exp);
-
 
 
             SharedPreferences prefe = getSharedPreferences("ExpData", MODE_PRIVATE);
