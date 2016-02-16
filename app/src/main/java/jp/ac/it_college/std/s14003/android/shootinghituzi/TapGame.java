@@ -16,11 +16,9 @@ import android.widget.ProgressBar;
 public class TapGame extends AppCompatActivity implements View.OnClickListener {
     String TAG = "TapGame";
     int Exp;
-    int Max = 500;
+    int Max = 50;
     private Bitmap inu;
     private ImageView iv;
-    private ImageView back;
-    private Bitmap background;
     private ProgressBar progressBar;
     private Button button;
 
@@ -29,6 +27,23 @@ public class TapGame extends AppCompatActivity implements View.OnClickListener {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_tap);
 
+        SharedPreferences prefe = getSharedPreferences("ExpData", MODE_PRIVATE);
+        Exp = prefe.getInt("ExpAdd", Exp);
+
+        if (Exp < Max) {
+            Log.d(TAG,"Exp < Max");
+            Log.d(TAG, Exp + "");
+            inu = BitmapFactory.decodeResource(getResources(), R.drawable.tapkittychange);
+            iv = (ImageView) findViewById(R.id.Hitsuzi_Button);
+            iv.setImageBitmap(inu);
+            iv.setOnClickListener(this);
+        }else {
+            Log.d(TAG,"Exp > Max");
+            inu = BitmapFactory.decodeResource(getResources(), R.drawable.tapbig);
+            iv = (ImageView) findViewById(R.id.Hitsuzi_Button);
+            iv.setImageBitmap(inu);
+            iv.setOnClickListener(this);
+        }
 
 
         button = (Button) findViewById(R.id.choice_Button);
@@ -38,27 +53,8 @@ public class TapGame extends AppCompatActivity implements View.OnClickListener {
 
         progressBar.setMax(Max);
 
-        SharedPreferences prefe = getSharedPreferences("ExpData", MODE_PRIVATE);
-        Exp = prefe.getInt("ExpAdd", Exp);
 
         progressBar.setProgress(Exp);
-
-
-        if (Exp <= Max) {
-            Log.d(TAG,"Exp != Max");
-            inu = BitmapFactory.decodeResource(getResources(), R.drawable.tapkitty);
-            iv = (ImageView) findViewById(R.id.Hitsuzi_Button);
-            iv.setImageBitmap(inu);
-
-            iv.setOnClickListener(this);
-        }else {
-            Log.d(TAG,"Exp == Max");
-            inu = BitmapFactory.decodeResource(getResources(), R.drawable.tapbig);
-            iv = (ImageView) findViewById(R.id.Hitsuzi_Button);
-            iv.setImageBitmap(inu);
-
-            iv.setOnClickListener(this);
-        }
 
 
     }
@@ -88,6 +84,18 @@ public class TapGame extends AppCompatActivity implements View.OnClickListener {
 
             progressBar.setProgress(Exp);
 
+            if (Exp < Max) {
+                inu = BitmapFactory.decodeResource(getResources(), R.drawable.tapkittychange);
+                iv = (ImageView) findViewById(R.id.Hitsuzi_Button);
+                iv.setImageBitmap(inu);
+
+                iv.setOnClickListener(this);
+            }else {
+                inu = BitmapFactory.decodeResource(getResources(), R.drawable.tapbig);
+                iv = (ImageView) findViewById(R.id.Hitsuzi_Button);
+                iv.setImageBitmap(inu);
+                iv.setOnClickListener(this);
+            }
 
         } else if (button == v) {
             Intent it = new Intent(this, Choice.class);
