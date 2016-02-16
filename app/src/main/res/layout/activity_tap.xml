@@ -4,27 +4,33 @@
     android:layout_height="match_parent"
     android:weightSum="1">
 
-    <LinearLayout
+    <FrameLayout
         android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="730dp"
         android:layout_weight="0.06"
-        android:weightSum="1">
+        android:weightSum="1"
+        android:background="@drawable/back">
+
 
         <ImageView
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:id="@+id/Hituzi_Button"
-            android:layout_gravity="center_horizontal" />
+            android:id="@+id/Hitsuzi_Button"
+            android:layout_gravity="center_horizontal"
+            android:layout_alignParentTop="true"
+            android:layout_centerHorizontal="true"
+            />
 
-    </LinearLayout>
+
+
+    </FrameLayout>
 
     <ProgressBar
         style="?android:attr/progressBarStyleHorizontal"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/exp_Bar"
-        android:max="2000"
         android:indeterminate="false" />
 
     <Button

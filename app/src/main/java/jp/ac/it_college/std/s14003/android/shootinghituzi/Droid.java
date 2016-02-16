@@ -17,10 +17,10 @@ public class Droid extends BaseObject {
     public Droid(Bitmap bitmap, int width, int height) {
         this.bitmap = bitmap;
 
-        int left = (width - bitmap.getWidth()) / 2;
+        int left =  (width - bitmap.getWidth()) / 2;
         int top = height - bitmap.getHeight();
-        int right = left + bitmap.getWidth();
-        int bottom = top + bitmap.getHeight();
+        int right = left + Math.round(bitmap.getWidth());
+        int bottom = top + Math.round(bitmap.getHeight());
         rect = new Rect(left, top, right, bottom);
 
         yPosition = rect.centerY();
@@ -36,16 +36,19 @@ public class Droid extends BaseObject {
     @Override
     public boolean isHit(BaseObject object) {
         if (object.getType() == Type.Missile) {
+
             if (status == STATUS_DESTROYED) {
+
                 Log.d(TAG, "STATUS_DESTROYED True");
                 return false;
+
             } else {
                 Log.d(TAG, "droid is hit!!");
                 return rect.contains(Math.round(object.xPosition), Math.round(object.yPosition));
             }
+        } else {
+            return false;
         }
-        return false;
-
     }
 
     @Override

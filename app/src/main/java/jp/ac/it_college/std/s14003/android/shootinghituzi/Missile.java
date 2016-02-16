@@ -14,6 +14,7 @@ public class Missile extends BaseObject {
 
     public Missile(Bitmap bitmap, int fromX, float alignX) {
         this.bitmap = bitmap;
+
         yPosition = 0;
         xPosition = fromX;
         this.alignX = alignX;
