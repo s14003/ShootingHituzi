@@ -1,9 +1,10 @@
 <resources>
     <string name="app_name">ShootingHituzi</string>
     <string name="score">0000</string>
-    <string name="home">Homeに戻る</string>
+    <string name="home">帰る</string>
     <string name="tap_button">お出かけ</string>
     <string name="max">難しい</string>
     <string name="normal">普通</string>
     <string name="easy">易しい</string>
+    <string name="seni">START</string>
 </resources>

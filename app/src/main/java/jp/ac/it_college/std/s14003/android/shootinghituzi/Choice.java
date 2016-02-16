@@ -37,6 +37,7 @@ public class Choice extends AppCompatActivity implements View.OnClickListener,Ga
             gameView = new GameView(this);
             setContentView(gameView);
             gameView.setCallback(this);
+
             SharedPreferences preferences = getSharedPreferences("LevelData", MODE_PRIVATE);
             SharedPreferences.Editor editor = preferences.edit();
             editor.putInt("MaxData", 100).apply();

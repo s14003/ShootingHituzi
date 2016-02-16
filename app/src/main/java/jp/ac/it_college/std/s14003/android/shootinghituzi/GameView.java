@@ -31,7 +31,6 @@ public class GameView extends SurfaceView implements SurfaceHolder.Callback {
     private final Paint paint = new Paint();
     private long score;
     private Callback callback;
-    private int num = 10;
     private DrawThread drawThread;
 
 
@@ -152,7 +151,7 @@ public class GameView extends SurfaceView implements SurfaceHolder.Callback {
         missileList.add(missile);
 
     }
-    private static void drawObjectList(
+    private static void drawObjectList (
             Canvas canvas, List<BaseObject> objectList, int width, int height) {
         for (int i = 0; i < objectList.size(); i++) {
             BaseObject object = objectList.get(i);

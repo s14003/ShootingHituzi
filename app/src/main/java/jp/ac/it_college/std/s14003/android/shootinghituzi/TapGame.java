@@ -29,21 +29,28 @@ public class TapGame extends AppCompatActivity implements View.OnClickListener {
 
         SharedPreferences prefe = getSharedPreferences("ExpData", MODE_PRIVATE);
         Exp = prefe.getInt("ExpAdd", Exp);
-
-        if (Exp < Max) {
-            Log.d(TAG,"Exp < Max");
-            Log.d(TAG, Exp + "");
-            inu = BitmapFactory.decodeResource(getResources(), R.drawable.tapkittychange);
-            iv = (ImageView) findViewById(R.id.Hitsuzi_Button);
-            iv.setImageBitmap(inu);
-            iv.setOnClickListener(this);
-        }else {
-            Log.d(TAG,"Exp > Max");
+        if (Max == 50) {
+            if (Exp < Max) {
+                Log.d(TAG,"Exp < Max");
+                Log.d(TAG, Exp + "");
+                inu = BitmapFactory.decodeResource(getResources(), R.drawable.tapkittychange);
+                iv = (ImageView) findViewById(R.id.Hitsuzi_Button);
+                iv.setImageBitmap(inu);
+                iv.setOnClickListener(this);
+            }else {
+                Log.d(TAG,"Exp > Max");
+                inu = BitmapFactory.decodeResource(getResources(), R.drawable.tapbig);
+                iv = (ImageView) findViewById(R.id.Hitsuzi_Button);
+                iv.setImageBitmap(inu);
+                iv.setOnClickListener(this);
+            }
+        } else if (Max == 500) {
             inu = BitmapFactory.decodeResource(getResources(), R.drawable.tapbig);
             iv = (ImageView) findViewById(R.id.Hitsuzi_Button);
             iv.setImageBitmap(inu);
             iv.setOnClickListener(this);
         }
+
 
 
         button = (Button) findViewById(R.id.choice_Button);
@@ -83,14 +90,24 @@ public class TapGame extends AppCompatActivity implements View.OnClickListener {
             Log.d(TAG, Exp + "");
 
             progressBar.setProgress(Exp);
+            if (Max == 50) {
 
-            if (Exp < Max) {
-                inu = BitmapFactory.decodeResource(getResources(), R.drawable.tapkittychange);
-                iv = (ImageView) findViewById(R.id.Hitsuzi_Button);
-                iv.setImageBitmap(inu);
+                if (Exp < Max) {
+                    inu = BitmapFactory.decodeResource(getResources(), R.drawable.tapkittychange);
+                    iv = (ImageView) findViewById(R.id.Hitsuzi_Button);
+                    iv.setImageBitmap(inu);
 
-                iv.setOnClickListener(this);
-            }else {
+                    iv.setOnClickListener(this);
+                }else {
+                    inu = BitmapFactory.decodeResource(getResources(), R.drawable.tapbig);
+                    iv = (ImageView) findViewById(R.id.Hitsuzi_Button);
+                    iv.setImageBitmap(inu);
+                    iv.setOnClickListener(this);
+
+
+                    progressBar.setMax(500);
+                }
+            } else if (Max == 500) {
                 inu = BitmapFactory.decodeResource(getResources(), R.drawable.tapbig);
                 iv = (ImageView) findViewById(R.id.Hitsuzi_Button);
                 iv.setImageBitmap(inu);

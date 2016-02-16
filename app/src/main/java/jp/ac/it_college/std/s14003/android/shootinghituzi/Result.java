@@ -1,6 +1,7 @@
 package jp.ac.it_college.std.s14003.android.shootinghituzi;
 
 
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -33,7 +34,8 @@ public class Result extends AppCompatActivity implements View.OnClickListener {
     @Override
     public void onClick(View v) {
         if (button == v) {
-            finish();
+            Intent it = new Intent(this, TapGame.class);
+            startActivity(it);
         }
     }
 }

@@ -10,7 +10,7 @@
         android:layout_height="730dp"
         android:layout_weight="0.06"
         android:weightSum="1"
-        android:background="@drawable/back">
+        android:background="@drawable/backcut">
 
 
         <ImageView
