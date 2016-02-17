@@ -28,10 +28,9 @@ public class Missile extends BaseObject {
 
     @Override
     public boolean isHit(BaseObject object) {
-        if (object.getType() == Type.Missile) {
+        if (object.getType() == Type.Missile && object.getType() == Type.Boss) {
             return false;
         }
-
         if (status == STATUS_DESTROYED) {
             return false;
         } else {

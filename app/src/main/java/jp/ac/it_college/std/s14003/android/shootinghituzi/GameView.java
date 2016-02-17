@@ -1,26 +1,27 @@
 package jp.ac.it_college.std.s14003.android.shootinghituzi;
 
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
 import android.os.Handler;
+import android.preference.PreferenceManager;
 import android.util.Log;
 import android.view.MotionEvent;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
-
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
-
 public class GameView extends SurfaceView implements SurfaceHolder.Callback {
-
+    private String TAG = "GameView";
     private static final long SCORE_LEVEL = 100;
     private Droid droid;
+    private Boss boss;
     private final List<BaseObject> bulletList = new ArrayList<>();
     private final List<BaseObject> missileList = new ArrayList<>();
     private static final int MISSILE_LAUNCH_WEIGHT = 50;
@@ -32,7 +33,8 @@ public class GameView extends SurfaceView implements SurfaceHolder.Callback {
     private long score;
     private Callback callback;
     private DrawThread drawThread;
-
+    private SharedPreferences pref;
+    int Level;
 
     private class DrawThread extends Thread {
         boolean isFinished;
@@ -56,7 +58,6 @@ public class GameView extends SurfaceView implements SurfaceHolder.Callback {
         }
     }
 
-
     public void startDrawThread() {
         stopDrawThread();
         drawThread = new DrawThread();
@@ -72,8 +73,7 @@ public class GameView extends SurfaceView implements SurfaceHolder.Callback {
         return true;
     }
 
-
-    public GameView(Context context) {
+    public GameView(Context context, int hoge) {
         super(context);
 
         paint.setColor(Color.BLACK);
@@ -81,6 +81,9 @@ public class GameView extends SurfaceView implements SurfaceHolder.Callback {
         paint.setAntiAlias(true);
         handler = new Handler();
         getHolder().addCallback(this);
+        pref = PreferenceManager.getDefaultSharedPreferences(context);
+        Level += hoge;
+
     }
 
     private void drawGame(Canvas canvas) {
@@ -90,9 +93,27 @@ public class GameView extends SurfaceView implements SurfaceHolder.Callback {
 
         canvas.drawColor(Color.WHITE);
         if (droid == null) {
-            Bitmap DroidBitmap =
-                    BitmapFactory.decodeResource(getResources(),R.drawable.gameinu);
-            droid = new Droid(DroidBitmap, width, height);
+            //Maxから値とってきて画像判定する
+            if (Level == 100) {
+                Bitmap DroidBitmap =
+                        BitmapFactory.decodeResource(getResources(),R.drawable.gameinu);
+                droid = new Droid(DroidBitmap, width, height);
+            } else if (Level == 200) {
+                Bitmap DroidBitmap =
+                        BitmapFactory.decodeResource(getResources(),R.drawable.gameinumini);
+                droid = new Droid(DroidBitmap, width, height);
+            } else if(Level == 300) {
+                Bitmap DroidBitmap =
+                        BitmapFactory.decodeResource(getResources(),R.drawable.kakasi);
+                droid = new Droid(DroidBitmap, width, height);
+            }
+
+        }
+
+        if (boss == null) {
+            Bitmap BossBitmap =
+                    BitmapFactory.decodeResource(getResources(),R.drawable.hituzineko);
+            boss = new Boss(BossBitmap, width, height);
         }
 
         drawObjectList(canvas, missileList, width, height);
@@ -128,13 +149,13 @@ public class GameView extends SurfaceView implements SurfaceHolder.Callback {
 
         //難易度
         if (random.nextInt(MISSILE_LAUNCH_WEIGHT) == 0) {
-            long count = score / SCORE_LEVEL + 1;
+            long count = score / Level + 1;
             for (int i = 0; i < count; i++) {
                 launchMissile();
             }
         }
-
         droid.draw(canvas);
+        boss.draw(canvas);
         canvas.drawText("Score:" + score, 0, SCORE_TEXT_SIZE, paint);
     }
 
@@ -192,7 +213,6 @@ public class GameView extends SurfaceView implements SurfaceHolder.Callback {
     public void surfaceCreated(SurfaceHolder holder) {
         startDrawThread();
     }
-
     @Override
     public void surfaceChanged(SurfaceHolder holder, int format, int width, int height) {
 

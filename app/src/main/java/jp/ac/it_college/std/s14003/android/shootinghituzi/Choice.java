@@ -13,50 +13,56 @@ public class Choice extends AppCompatActivity implements View.OnClickListener,Ga
     private Button maxButton;
     private Button normalButton;
     private Button easyButton;
+    private int Max;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_choice);
 
-        maxButton = (Button)findViewById(R.id.LevelMax_button);
-        maxButton.setOnClickListener(this);
+        SharedPreferences preferences = getSharedPreferences("MaxData", MODE_PRIVATE);
+        Max = preferences.getInt("MaxChangeKids", Max);
 
-        normalButton = (Button)findViewById(R.id.LevelNormal_button);
-        normalButton.setOnClickListener(this);
+        if (Max == 1000) {
+            maxButton = (Button)findViewById(R.id.LevelMax_button);
+            maxButton.setOnClickListener(this);
+            normalButton = (Button)findViewById(R.id.LevelNormal_button);
+            normalButton.setOnClickListener(this);
+            easyButton = (Button) findViewById(R.id.LevelEasy_button);
+            easyButton.setOnClickListener(this);
 
-        easyButton = (Button)findViewById(R.id.LevelEasy_button);
-        easyButton.setOnClickListener(this);
-
+        } else if (Max == 500 ) {
+            normalButton = (Button)findViewById(R.id.LevelNormal_button);
+            normalButton.setOnClickListener(this);
+            easyButton = (Button) findViewById(R.id.LevelEasy_button);
+            easyButton.setOnClickListener(this);
+        } else if (Max == 50){
+            easyButton = (Button) findViewById(R.id.LevelEasy_button);
+            easyButton.setOnClickListener(this);
+        }
     }
 
     @Override
     public void onClick(View v) {
+        //Max呼び出して判定
 
         if (maxButton == v) {
-            gameView = new GameView(this);
+            gameView = new GameView(this,100);
             setContentView(gameView);
             gameView.setCallback(this);
 
-            SharedPreferences preferences = getSharedPreferences("LevelData", MODE_PRIVATE);
-            SharedPreferences.Editor editor = preferences.edit();
-            editor.putInt("MaxData", 100).apply();
 
         } else if (normalButton == v) {
-            gameView = new GameView(this);
+            gameView = new GameView(this,200);
             setContentView(gameView);
             gameView.setCallback(this);
-            SharedPreferences preferences = getSharedPreferences("LevelData", MODE_PRIVATE);
-            SharedPreferences.Editor editor = preferences.edit();
-            editor.putInt("NormalData", 50).apply();
+
 
         } else if (easyButton == v) {
-            gameView = new GameView(this);
+            gameView = new GameView(this,300);
             setContentView(gameView);
             gameView.setCallback(this);
-            SharedPreferences preferences = getSharedPreferences("LevelData", MODE_PRIVATE);
-            SharedPreferences.Editor editor = preferences.edit();
-            editor.putInt("MaxData", 25).apply();
+
         }
     }
 
