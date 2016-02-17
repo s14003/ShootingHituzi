@@ -12,7 +12,6 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 
-
 public class TapGame extends AppCompatActivity implements View.OnClickListener {
     String TAG = "TapGame";
     int Exp;
@@ -29,39 +28,49 @@ public class TapGame extends AppCompatActivity implements View.OnClickListener {
 
         SharedPreferences prefe = getSharedPreferences("ExpData", MODE_PRIVATE);
         Exp = prefe.getInt("ExpAdd", Exp);
-        if (Max == 50) {
-            if (Exp < Max) {
-                Log.d(TAG,"Exp < Max");
-                Log.d(TAG, Exp + "");
-                inu = BitmapFactory.decodeResource(getResources(), R.drawable.tapkittychange);
-                iv = (ImageView) findViewById(R.id.Hitsuzi_Button);
-                iv.setImageBitmap(inu);
-                iv.setOnClickListener(this);
-            }else {
-                Log.d(TAG,"Exp > Max");
-                inu = BitmapFactory.decodeResource(getResources(), R.drawable.tapbig);
-                iv = (ImageView) findViewById(R.id.Hitsuzi_Button);
-                iv.setImageBitmap(inu);
-                iv.setOnClickListener(this);
-            }
-        } else if (Max == 500) {
-            inu = BitmapFactory.decodeResource(getResources(), R.drawable.tapbig);
-            iv = (ImageView) findViewById(R.id.Hitsuzi_Button);
-            iv.setImageBitmap(inu);
-            iv.setOnClickListener(this);
-        }
-
-
 
         button = (Button) findViewById(R.id.choice_Button);
         button.setOnClickListener(this);
 
         progressBar = (ProgressBar) findViewById(R.id.exp_Bar);
 
-        progressBar.setMax(Max);
+        SharedPreferences preferences = getSharedPreferences("MaxData", MODE_PRIVATE);
+        Max = preferences.getInt("MaxChangeKids", Max);
 
+        progressBar.setMax(Max);
+        Log.d(TAG, "Maxの値" + Max);
 
         progressBar.setProgress(Exp);
+
+        if (Max == 50) {
+            if (Exp < Max) {
+                Log.d(TAG,"Exp < Max");
+                Log.d(TAG, Max + "");
+                inu = BitmapFactory.decodeResource(getResources(), R.drawable.tapkittychange);
+                iv = (ImageView) findViewById(R.id.Hitsuzi_Button);
+                iv.setImageBitmap(inu);
+                iv.setOnClickListener(this);
+            }else {
+                Log.d(TAG,"" + Max);
+                Log.d(TAG,"Exp > Max");
+                inu = BitmapFactory.decodeResource(getResources(), R.drawable.hitujikids);
+                iv = (ImageView) findViewById(R.id.Hitsuzi_Button);
+                iv.setImageBitmap(inu);
+                iv.setOnClickListener(this);
+            }
+        } else if (Max == 500) {
+            inu = BitmapFactory.decodeResource(getResources(), R.drawable.hitujikids);
+            iv = (ImageView) findViewById(R.id.Hitsuzi_Button);
+            iv.setImageBitmap(inu);
+            iv.setOnClickListener(this);
+        } else if (Max == 1000) {
+
+            inu = BitmapFactory.decodeResource(getResources(),R.drawable.tapbig);
+            iv = (ImageView) findViewById(R.id.Hitsuzi_Button);
+            iv.setImageBitmap(inu);
+            iv.setOnClickListener(this);
+
+        }
 
 
     }
@@ -90,6 +99,7 @@ public class TapGame extends AppCompatActivity implements View.OnClickListener {
             Log.d(TAG, Exp + "");
 
             progressBar.setProgress(Exp);
+
             if (Max == 50) {
 
                 if (Exp < Max) {
@@ -99,25 +109,43 @@ public class TapGame extends AppCompatActivity implements View.OnClickListener {
 
                     iv.setOnClickListener(this);
                 }else {
+                    inu = BitmapFactory.decodeResource(getResources(), R.drawable.hitujikids);
+                    iv = (ImageView) findViewById(R.id.Hitsuzi_Button);
+                    iv.setImageBitmap(inu);
+                    iv.setOnClickListener(this);
+
+                    Max += 450;
+                    progressBar.setMax(Max);
+                    SharedPreferences preference = getSharedPreferences("MaxData",MODE_PRIVATE);
+                    SharedPreferences.Editor Max_editor = preference.edit();
+                    Max_editor.putInt("MaxChangeKids", Max).apply();
+                    Log.d(TAG,"Kids Max" + Max);
+
+                }
+            } else if (Max == 500) {
+                if (Max > Exp) {
+                    inu = BitmapFactory.decodeResource(getResources(), R.drawable.hitujikids);
+                    iv = (ImageView) findViewById(R.id.Hitsuzi_Button);
+                    iv.setImageBitmap(inu);
+                    iv.setOnClickListener(this);
+                } else {
+
                     inu = BitmapFactory.decodeResource(getResources(), R.drawable.tapbig);
                     iv = (ImageView) findViewById(R.id.Hitsuzi_Button);
                     iv.setImageBitmap(inu);
                     iv.setOnClickListener(this);
 
-
-                    progressBar.setMax(500);
+                    Max += 500;
+                    progressBar.setMax(Max);
+                    SharedPreferences preference = getSharedPreferences("MaxData",MODE_PRIVATE);
+                    SharedPreferences.Editor Max_editor = preference.edit();
+                    Max_editor.putInt("MaxChangeKids", Max).apply();
+                    Log.d(TAG,"Change Max" + Max);
                 }
-            } else if (Max == 500) {
-                inu = BitmapFactory.decodeResource(getResources(), R.drawable.tapbig);
-                iv = (ImageView) findViewById(R.id.Hitsuzi_Button);
-                iv.setImageBitmap(inu);
-                iv.setOnClickListener(this);
             }
-
         } else if (button == v) {
             Intent it = new Intent(this, Choice.class);
             startActivity(it);
-
         }
     }
 
