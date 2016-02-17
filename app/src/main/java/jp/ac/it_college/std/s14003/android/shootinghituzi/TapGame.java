@@ -20,6 +20,8 @@ public class TapGame extends AppCompatActivity implements View.OnClickListener {
     private ImageView iv;
     private ProgressBar progressBar;
     private Button button;
+    private Bitmap Scarecrow;
+    private ImageView sv;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,6 +44,11 @@ public class TapGame extends AppCompatActivity implements View.OnClickListener {
 
         progressBar.setProgress(Exp);
 
+        Scarecrow = BitmapFactory.decodeResource(getResources(), R.drawable.kakasi);
+        sv = (ImageView) findViewById(R.id.kakasi);
+        sv.setImageBitmap(Scarecrow);
+        sv.setOnClickListener(this);
+
         if (Max == 50) {
             if (Exp < Max) {
                 Log.d(TAG,"Exp < Max");
@@ -49,27 +56,26 @@ public class TapGame extends AppCompatActivity implements View.OnClickListener {
                 inu = BitmapFactory.decodeResource(getResources(), R.drawable.tapkittychange);
                 iv = (ImageView) findViewById(R.id.Hitsuzi_Button);
                 iv.setImageBitmap(inu);
-                iv.setOnClickListener(this);
+                Max = 50;
+                SharedPreferences preference = getSharedPreferences("MaxData",MODE_PRIVATE);
+                SharedPreferences.Editor Max_editor = preference.edit();
+                Max_editor.putInt("MaxChangeKids", Max).apply();
             }else {
                 Log.d(TAG,"" + Max);
-                Log.d(TAG,"Exp > Max");
+                Log.d(TAG, "Exp > Max");
                 inu = BitmapFactory.decodeResource(getResources(), R.drawable.hitujikids);
                 iv = (ImageView) findViewById(R.id.Hitsuzi_Button);
                 iv.setImageBitmap(inu);
-                iv.setOnClickListener(this);
             }
         } else if (Max == 500) {
             inu = BitmapFactory.decodeResource(getResources(), R.drawable.hitujikids);
             iv = (ImageView) findViewById(R.id.Hitsuzi_Button);
             iv.setImageBitmap(inu);
-            iv.setOnClickListener(this);
-        } else if (Max == 1000) {
 
+        } else if (Max == 1000) {
             inu = BitmapFactory.decodeResource(getResources(),R.drawable.tapbig);
             iv = (ImageView) findViewById(R.id.Hitsuzi_Button);
             iv.setImageBitmap(inu);
-            iv.setOnClickListener(this);
-
         }
 
 
@@ -79,7 +85,8 @@ public class TapGame extends AppCompatActivity implements View.OnClickListener {
     @Override
     public void onClick(View v) {
         //noinspection EqualsBetweenInconvertibleTypes,StatementWithEmptyBody
-        if (iv == v) {
+
+        if (sv == v) {
 
             SharedPreferences pref = getSharedPreferences("ExpData", MODE_PRIVATE);
             SharedPreferences.Editor editor = pref.edit();
@@ -107,14 +114,13 @@ public class TapGame extends AppCompatActivity implements View.OnClickListener {
                     iv = (ImageView) findViewById(R.id.Hitsuzi_Button);
                     iv.setImageBitmap(inu);
 
-                    iv.setOnClickListener(this);
                 }else {
                     inu = BitmapFactory.decodeResource(getResources(), R.drawable.hitujikids);
                     iv = (ImageView) findViewById(R.id.Hitsuzi_Button);
                     iv.setImageBitmap(inu);
-                    iv.setOnClickListener(this);
 
                     Max += 450;
+                    progressBar.setProgress(0);
                     progressBar.setMax(Max);
                     SharedPreferences preference = getSharedPreferences("MaxData",MODE_PRIVATE);
                     SharedPreferences.Editor Max_editor = preference.edit();
@@ -124,18 +130,18 @@ public class TapGame extends AppCompatActivity implements View.OnClickListener {
                 }
             } else if (Max == 500) {
                 if (Max > Exp) {
+
                     inu = BitmapFactory.decodeResource(getResources(), R.drawable.hitujikids);
                     iv = (ImageView) findViewById(R.id.Hitsuzi_Button);
                     iv.setImageBitmap(inu);
-                    iv.setOnClickListener(this);
                 } else {
 
                     inu = BitmapFactory.decodeResource(getResources(), R.drawable.tapbig);
                     iv = (ImageView) findViewById(R.id.Hitsuzi_Button);
                     iv.setImageBitmap(inu);
-                    iv.setOnClickListener(this);
 
                     Max += 500;
+                    progressBar.setProgress(0);
                     progressBar.setMax(Max);
                     SharedPreferences preference = getSharedPreferences("MaxData",MODE_PRIVATE);
                     SharedPreferences.Editor Max_editor = preference.edit();
