@@ -56,10 +56,12 @@ public class TapGame extends AppCompatActivity implements View.OnClickListener {
                 inu = BitmapFactory.decodeResource(getResources(), R.drawable.tapkittychange);
                 iv = (ImageView) findViewById(R.id.Hitsuzi_Button);
                 iv.setImageBitmap(inu);
+
                 Max = 50;
                 SharedPreferences preference = getSharedPreferences("MaxData",MODE_PRIVATE);
                 SharedPreferences.Editor Max_editor = preference.edit();
                 Max_editor.putInt("MaxChangeKids", Max).apply();
+
             }else {
                 Log.d(TAG,"" + Max);
                 Log.d(TAG, "Exp > Max");
@@ -122,6 +124,7 @@ public class TapGame extends AppCompatActivity implements View.OnClickListener {
                     Max += 450;
                     progressBar.setProgress(0);
                     progressBar.setMax(Max);
+
                     SharedPreferences preference = getSharedPreferences("MaxData",MODE_PRIVATE);
                     SharedPreferences.Editor Max_editor = preference.edit();
                     Max_editor.putInt("MaxChangeKids", Max).apply();
@@ -143,6 +146,7 @@ public class TapGame extends AppCompatActivity implements View.OnClickListener {
                     Max += 500;
                     progressBar.setProgress(0);
                     progressBar.setMax(Max);
+
                     SharedPreferences preference = getSharedPreferences("MaxData",MODE_PRIVATE);
                     SharedPreferences.Editor Max_editor = preference.edit();
                     Max_editor.putInt("MaxChangeKids", Max).apply();
