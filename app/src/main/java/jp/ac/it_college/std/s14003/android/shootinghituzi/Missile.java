@@ -14,11 +14,9 @@ public class Missile extends BaseObject {
 
     public Missile(Bitmap bitmap, int fromX, float alignX) {
         this.bitmap = bitmap;
-
         yPosition = 0;
         xPosition = fromX;
         this.alignX = alignX;
-
     }
 
     @Override
@@ -28,7 +26,7 @@ public class Missile extends BaseObject {
 
     @Override
     public boolean isHit(BaseObject object) {
-        if (object.getType() == Type.Missile && object.getType() == Type.Boss) {
+        if (object.getType() == Type.Missile) {
             return false;
         }
         if (status == STATUS_DESTROYED) {
@@ -49,7 +47,5 @@ public class Missile extends BaseObject {
     public void move() {
         yPosition += 1 * MOVE_WEIGHT;
         xPosition += alignX * MOVE_WEIGHT;
-
-
     }
 }

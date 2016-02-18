@@ -18,6 +18,7 @@ import java.util.List;
 import java.util.Random;
 
 public class GameView extends SurfaceView implements SurfaceHolder.Callback {
+
     private String TAG = "GameView";
     private Droid droid;
     private Boss boss;
@@ -126,26 +127,51 @@ public class GameView extends SurfaceView implements SurfaceHolder.Callback {
             for (int j = 0; j < bulletList.size(); j++) {
                 BaseObject bullet = bulletList.get(j);
 
-                if (missile.isHit(bullet)) {
-                    missile.hit();
-                    bullet.hit();
-                    score += 10;
+                if (bullet.isHit(missile)) {
+                    if (missile.isHit(bullet)) {
+                        missile.hit();
+                        bullet.hit();
+                        score += 10;
+                    }
+
                 }
             }
         }
-
+        //Boss
+        for (int i = 0; i < bulletList.size(); i++) {
+            BaseObject bullet = bulletList.get(i);
+            if (bullet.isHit(boss)) {
+                Log.d(TAG,"Bullet isHit boss is ok");
+                    bullet.hit();
+                    boss.hit();
+                    score += 100;
+                    Log.d(TAG,"Score += 100");
+                    handler.post(new Runnable() {
+                        @Override
+                        public void run() {
+                            callback.onGameOver(score);
+                        }
+                    });
+                    break;
+            }
+        }
+        //Player
         for (int i = 0; i < missileList.size(); i++) {
             BaseObject missile = missileList.get(i);
             if (missile.isHit(droid)) {
-                missile.hit();
-                droid.hit();
-                handler.post(new Runnable() {
-                    @Override
-                    public void run() {
-                        callback.onGameOver(score);
-                    }
-                });
-                break;
+                Log.d(TAG,"missile isHit  droid is true");
+                if (droid.isHit(missile)) {
+                    Log.d(TAG,"droid isHit  missile is true");
+                    missile.hit();
+                    droid.hit();
+                    handler.post(new Runnable() {
+                        @Override
+                        public void run() {
+                            callback.onGameOver(score);
+                        }
+                    });
+                    break;
+                }
             }
         }
 

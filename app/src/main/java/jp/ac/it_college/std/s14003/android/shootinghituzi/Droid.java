@@ -7,7 +7,6 @@ import android.graphics.Paint;
 import android.graphics.Rect;
 import android.util.Log;
 
-
 public class Droid extends BaseObject {
     private final String TAG = "Droid";
     private final Paint paint = new Paint();
@@ -15,12 +14,13 @@ public class Droid extends BaseObject {
     public final Rect rect;
 
     public Droid(Bitmap bitmap, int width, int height) {
-        this.bitmap = bitmap;
 
+        this.bitmap = bitmap;
         int left =  (width - bitmap.getWidth()) / 2;
         int top = height - bitmap.getHeight();
         int right = left + Math.round(bitmap.getWidth());
         int bottom = top + Math.round(bitmap.getHeight());
+
         rect = new Rect(left, top, right, bottom);
 
         yPosition = rect.centerY();
@@ -60,7 +60,6 @@ public class Droid extends BaseObject {
 
     @Override
     public void move() {
-
     }
 
     @Override

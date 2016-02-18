@@ -30,7 +30,6 @@ public abstract class BaseObject {
 
     public void hit() {
         status = STATUS_DESTROYED;
-
     }
 
     public abstract void draw(Canvas canvas);

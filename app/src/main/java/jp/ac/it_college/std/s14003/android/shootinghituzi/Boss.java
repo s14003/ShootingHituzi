@@ -1,6 +1,5 @@
 package jp.ac.it_college.std.s14003.android.shootinghituzi;
 
-
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.Paint;
@@ -10,12 +9,13 @@ import android.util.Log;
 public class Boss extends BaseObject {
     private String TAG = "Boss";
     private final Paint paint = new Paint();
-    private final Bitmap bitmaps;
+    private final Bitmap bitmap;
     public final Rect rect;
 
     public Boss(Bitmap bitmap, int width, int height) {
-        this.bitmaps = bitmap;
-        int top = (height + bitmap.getHeight()) / 20;
+
+        this.bitmap = bitmap;
+        int top = (height + bitmap.getHeight()) / 10;
         int left =  (width - bitmap.getWidth()) / 2;
         int right = left + bitmap.getWidth();
         int bottom = top - bitmap.getHeight();
@@ -24,7 +24,6 @@ public class Boss extends BaseObject {
 
         yPosition = rect.centerY();
         xPosition = rect.centerX();
-
     }
     @Override
     public Type getType() {
@@ -33,15 +32,15 @@ public class Boss extends BaseObject {
 
     @Override
     public boolean isHit(BaseObject object) {
-        if (object.getType() == Type.Missile) {
 
+        if (object.getType() == Type.Bullet) {
             if (status == STATUS_DESTROYED) {
 
                 Log.d(TAG, "STATUS_DESTROYED True");
                 return false;
 
             } else {
-                Log.d(TAG, "droid is hit!!");
+                Log.d(TAG, "boss is hit!!");
                 return rect.contains(Math.round(object.xPosition), Math.round(object.yPosition));
             }
         } else {
@@ -52,13 +51,12 @@ public class Boss extends BaseObject {
     @Override
     public void draw(Canvas canvas) {
         if (status == STATUS_NORMAL) {
-            canvas.drawBitmap(bitmaps, rect.left, rect.top, paint );
+            canvas.drawBitmap(bitmap, rect.left, rect.top, paint );
         }
     }
 
     @Override
     public void move() {
-
     }
 
     @Override

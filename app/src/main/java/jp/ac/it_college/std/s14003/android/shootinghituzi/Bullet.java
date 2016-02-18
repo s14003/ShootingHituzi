@@ -6,7 +6,6 @@ import android.graphics.Paint;
 import android.graphics.Rect;
 import android.util.Log;
 
-
 public class Bullet extends BaseObject {
     private static final String TAG = "Bullet";
     private static final float SIZE = 15f;
@@ -15,6 +14,7 @@ public class Bullet extends BaseObject {
 
     Bullet(float alignX, Rect rect) {
         this.alignX = alignX;
+
         yPosition = rect.centerY();
         xPosition = rect.centerX();
         paint.setColor(Color.RED);
@@ -27,11 +27,11 @@ public class Bullet extends BaseObject {
 
     @Override
     public boolean isHit(BaseObject object) {
-        if (object.getType() != Type.Missile) {
+        if (status == STATUS_DESTROYED) {
             return false;
+        } else {
+            return (calcDistance(this, object) < SIZE);
         }
-        Log.d(TAG,"Bullet is hit!!!");
-        return (calcDistance(this, object) < SIZE);
     }
 
     @Override
