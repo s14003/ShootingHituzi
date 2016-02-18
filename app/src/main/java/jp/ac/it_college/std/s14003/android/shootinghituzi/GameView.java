@@ -19,7 +19,6 @@ import java.util.Random;
 
 public class GameView extends SurfaceView implements SurfaceHolder.Callback {
     private String TAG = "GameView";
-    private static final long SCORE_LEVEL = 100;
     private Droid droid;
     private Boss boss;
     private final List<BaseObject> bulletList = new ArrayList<>();
@@ -95,22 +94,25 @@ public class GameView extends SurfaceView implements SurfaceHolder.Callback {
         if (droid == null) {
             //Maxから値とってきて画像判定する
             if (Level == 100) {
+                Log.d(TAG,"Level" + Level);
                 Bitmap DroidBitmap =
                         BitmapFactory.decodeResource(getResources(),R.drawable.gameinu);
                 droid = new Droid(DroidBitmap, width, height);
             } else if (Level == 200) {
+                Log.d(TAG,"Level" + Level);
                 Bitmap DroidBitmap =
                         BitmapFactory.decodeResource(getResources(),R.drawable.gameinumini);
                 droid = new Droid(DroidBitmap, width, height);
             } else if(Level == 300) {
+                Log.d(TAG,"Level" + Level);
                 Bitmap DroidBitmap =
-                        BitmapFactory.decodeResource(getResources(),R.drawable.kakasi);
+                        BitmapFactory.decodeResource(getResources(),R.drawable.gameinumini);
                 droid = new Droid(DroidBitmap, width, height);
             }
 
         }
-
         if (boss == null) {
+            Log.d(TAG, "Boss == null");
             Bitmap BossBitmap =
                     BitmapFactory.decodeResource(getResources(),R.drawable.hituzineko);
             boss = new Boss(BossBitmap, width, height);
@@ -154,8 +156,8 @@ public class GameView extends SurfaceView implements SurfaceHolder.Callback {
                 launchMissile();
             }
         }
-        droid.draw(canvas);
         boss.draw(canvas);
+        droid.draw(canvas);
         canvas.drawText("Score:" + score, 0, SCORE_TEXT_SIZE, paint);
     }
 

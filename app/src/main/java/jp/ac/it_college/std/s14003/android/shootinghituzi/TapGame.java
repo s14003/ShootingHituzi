@@ -44,7 +44,7 @@ public class TapGame extends AppCompatActivity implements View.OnClickListener {
 
         progressBar.setProgress(Exp);
 
-        Scarecrow = BitmapFactory.decodeResource(getResources(), R.drawable.kakasi);
+        Scarecrow = BitmapFactory.decodeResource(getResources(), R.drawable.scarecrow);
         sv = (ImageView) findViewById(R.id.kakasi);
         sv.setImageBitmap(Scarecrow);
         sv.setOnClickListener(this);
