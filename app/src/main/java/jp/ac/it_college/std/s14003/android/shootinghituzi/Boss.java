@@ -15,12 +15,13 @@ public class Boss extends BaseObject {
 
     public Boss(Bitmap bitmap, int width, int height) {
         this.bitmaps = bitmap;
-        int top = height + bitmap.getHeight();
-        int left =  (width - bitmap.getWidth());
+        int top = (height + bitmap.getHeight()) / 20;
+        int left =  (width - bitmap.getWidth()) / 2;
         int right = left + bitmap.getWidth();
         int bottom = top - bitmap.getHeight();
 
         rect = new Rect(left, top, right, bottom);
+
         yPosition = rect.centerY();
         xPosition = rect.centerX();
 
