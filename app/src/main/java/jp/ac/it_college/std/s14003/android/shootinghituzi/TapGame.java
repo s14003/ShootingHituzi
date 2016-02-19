@@ -20,7 +20,6 @@ public class TapGame extends AppCompatActivity implements View.OnClickListener {
     private ImageView iv;
     private ProgressBar progressBar;
     private Button button;
-    private Bitmap Scarecrow;
     private ImageView sv;
 
     @Override
@@ -44,9 +43,9 @@ public class TapGame extends AppCompatActivity implements View.OnClickListener {
 
         progressBar.setProgress(Exp);
 
-        Scarecrow = BitmapFactory.decodeResource(getResources(), R.drawable.scarecrow);
+        Bitmap scarecrow = BitmapFactory.decodeResource(getResources(), R.drawable.scarecrow);
         sv = (ImageView) findViewById(R.id.kakasi);
-        sv.setImageBitmap(Scarecrow);
+        sv.setImageBitmap(scarecrow);
         sv.setOnClickListener(this);
 
         if (Max == 50) {
@@ -80,9 +79,7 @@ public class TapGame extends AppCompatActivity implements View.OnClickListener {
             iv.setImageBitmap(inu);
         }
 
-
     }
-
 
     @Override
     public void onClick(View v) {
@@ -101,7 +98,6 @@ public class TapGame extends AppCompatActivity implements View.OnClickListener {
             SharedPreferences.Editor edit = preferences.edit();
             edit.putInt("ExpAdd", Exp).apply();
             Log.d(TAG, "Total Exp :" + Exp);
-
 
             SharedPreferences prefe = getSharedPreferences("ExpData", MODE_PRIVATE);
             Exp = prefe.getInt("ExpAdd", 0);

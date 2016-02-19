@@ -45,6 +45,8 @@ public class Choice extends AppCompatActivity implements View.OnClickListener,Ga
     @Override
     public void onClick(View v) {
         //Max呼び出して判定
+        SharedPreferences preferences = getSharedPreferences("MaxData", MODE_PRIVATE);
+        Max = preferences.getInt("MaxChangeKids", Max);
 
         if (maxButton == v) {
             gameView = new GameView(this,100);

@@ -29,6 +29,7 @@ public class Missile extends BaseObject {
         if (object.getType() == Type.Missile) {
             return false;
         }
+
         if (status == STATUS_DESTROYED) {
             return false;
         } else {
