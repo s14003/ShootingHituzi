@@ -69,14 +69,19 @@ public class Choice extends AppCompatActivity implements View.OnClickListener,Ga
     }
 
     @Override
-    public void onGameOver(long score) {
+    public void onGameOver(int life, int enemy_life) {
         //SharedPreferencesにスコアを保存させる
         gameView.stopDrawThread();
         //Toast.makeText(this, "Game Over スコア" + score, Toast.LENGTH_LONG).show();
 
         SharedPreferences data = getSharedPreferences("NewData", MODE_PRIVATE);
         SharedPreferences.Editor editor = data.edit();
-        editor.putLong("ScoreData", score).apply();
+        editor.putLong("LifeData", life).apply();
+
+        SharedPreferences pref = getSharedPreferences("NewData", MODE_PRIVATE);
+        SharedPreferences.Editor edit = pref.edit();
+        edit.putLong("EnemyData", life).apply();
+
         Intent it = new Intent(this, Result.class);
         startActivity(it);
     }

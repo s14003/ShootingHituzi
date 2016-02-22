@@ -11,6 +11,7 @@ import android.util.Log;
 import android.view.MotionEvent;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
@@ -93,10 +94,6 @@ public class GameView extends SurfaceView implements SurfaceHolder.Callback{
 
         canvas.drawColor(Color.WHITE);
 
-
-        //Bitmap Background = BitmapFactory.decodeResource(getResources(), R.drawable.test);
-        //canvas.drawBitmap(Background,0,0,paint);
-
         String TAG = "GameView";
         if (droid == null) {
             //Maxから値とってきて画像判定する
@@ -105,16 +102,21 @@ public class GameView extends SurfaceView implements SurfaceHolder.Callback{
                 Bitmap DroidBitmap =
                         BitmapFactory.decodeResource(getResources(),R.drawable.gameinu);
                 droid = new Droid(DroidBitmap, width, height);
+                enemy_life += 2900;
+                life += 20;
             } else if (Level == 200) {
                 Log.d(TAG,"Level" + Level);
                 Bitmap DroidBitmap =
                         BitmapFactory.decodeResource(getResources(),R.drawable.gameinumini);
                 droid = new Droid(DroidBitmap, width, height);
+                enemy_life += 1800;
+                life += 10;
             } else if(Level == 300) {
                 Log.d(TAG,"Level" + Level);
                 Bitmap DroidBitmap =
                         BitmapFactory.decodeResource(getResources(),R.drawable.gameinubaby);
                 droid = new Droid(DroidBitmap, width, height);
+                enemy_life += 700;
             }
         }
 
@@ -159,7 +161,7 @@ public class GameView extends SurfaceView implements SurfaceHolder.Callback{
                         @Override
                         public void run() {
                             boss.hit();
-                            callback.onGameOver(score);
+                            callback.onGameOver(life, enemy_life);
                         }
                     });
                     break;
@@ -180,7 +182,7 @@ public class GameView extends SurfaceView implements SurfaceHolder.Callback{
                             @Override
                             public void run() {
                                 droid.hit();
-                                callback.onGameOver(life);
+                                callback.onGameOver(life, enemy_life);
                             }
                         });
                         break;
@@ -244,7 +246,7 @@ public class GameView extends SurfaceView implements SurfaceHolder.Callback{
     }
 
     public interface Callback {
-        void onGameOver (long score);
+        void onGameOver (int life, int enemy_life);
     }
 
     public void setCallback(Callback callback) {
