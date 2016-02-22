@@ -14,7 +14,8 @@
     <TableLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_weight="0.90">
+        android:layout_weight="0.90"
+        android:id="@+id/result">
 
 
 
@@ -48,7 +49,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textAppearance="?android:attr/textAppearanceLarge"
-                android:text="Youe Score"
+                android:text="YoueLife"
                 android:id="@+id/textView"
                 android:textSize="30dp"
                 android:layout_column="29" />
@@ -57,10 +58,10 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textAppearance="?android:attr/textAppearanceLarge"
-                android:text="Enemy Life"
+                android:text="EnemyLife"
                 android:id="@+id/textView2"
                 android:textSize="30dp"
-                android:layout_column="39" />
+                android:layout_column="43" />
         </TableRow>
 
 
@@ -77,16 +78,16 @@
                 android:id="@+id/score"
                 android:layout_gravity="center_horizontal"
                 android:textSize="50sp"
-                android:layout_column="37" />
+                android:layout_column="29" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textAppearance="?android:attr/textAppearanceLarge"
-                android:id="@+id/textView3"
+                android:id="@+id/enemy_life"
                 android:text="0000"
                 android:textSize="50dp"
-                android:layout_column="42" />
+                android:layout_column="43" />
         </TableRow>
 
 
@@ -94,6 +95,14 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:id="@+id/kekka"
+                android:layout_column="42"
+                android:textSize="50dp"
+                android:text="result" />
         </TableRow>
 
         <TableRow
@@ -149,7 +158,13 @@
                 android:layout_height="wrap_content"
                 android:text="@string/home"
                 android:id="@+id/back_button"
-                android:layout_column="39" />
+                android:layout_column="42" />
+        </TableRow>
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
         </TableRow>
     </TableLayout>
 

@@ -80,7 +80,7 @@ public class Choice extends AppCompatActivity implements View.OnClickListener,Ga
 
         SharedPreferences pref = getSharedPreferences("NewData", MODE_PRIVATE);
         SharedPreferences.Editor edit = pref.edit();
-        edit.putLong("EnemyData", life).apply();
+        edit.putLong("EnemyData", enemy_life).apply();
 
         Intent it = new Intent(this, Result.class);
         startActivity(it);

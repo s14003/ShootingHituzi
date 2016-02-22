@@ -20,7 +20,6 @@ public class GameView extends SurfaceView implements SurfaceHolder.Callback{
 
     private Droid droid;
     private Boss boss;
-    private String TAG = "GameView";
     private final List<BaseObject> bulletList = new ArrayList<>();
     private final List<BaseObject> missileList = new ArrayList<>();
     private static final int MISSILE_LAUNCH_WEIGHT = 50;
@@ -84,6 +83,7 @@ public class GameView extends SurfaceView implements SurfaceHolder.Callback{
         getHolder().addCallback(this);
         Level += hoge;
         enemy_life += Level;
+        String TAG = "GameView";
         Log.d(TAG,"enemy_life = " + enemy_life);
 
     }

@@ -22,8 +22,24 @@ public class Result extends AppCompatActivity implements View.OnClickListener {
         SharedPreferences preferences = getSharedPreferences("NewData", MODE_PRIVATE);
         Long score = preferences.getLong("LifeData", 0);
         Log.d("Result", score + "");
+
         TextView scoreView = (TextView)findViewById(R.id.score);
         scoreView.setText("" + score);
+
+        SharedPreferences pref = getSharedPreferences("NewData", MODE_PRIVATE);
+        Long enemy_life = pref.getLong("EnemyData", 0);
+        Log.d("Result", enemy_life + "");
+
+        TextView enemylife = (TextView)findViewById(R.id.enemy_life);
+        enemylife.setText(enemy_life + "");
+        Log.d("EnemyLife", enemy_life + "");
+
+        TextView result = (TextView)findViewById(R.id.kekka);
+        if (enemy_life > score) {
+            result.setText("Your loser");
+        } else {
+            result.setText("Your winner");
+        }
 
         button = (Button)findViewById(R.id.back_button);
         button.setOnClickListener(this);
