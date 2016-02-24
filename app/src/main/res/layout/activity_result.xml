@@ -3,7 +3,7 @@
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:weightSum="1"
-    >
+    android:background="@drawable/choice">
 
     <LinearLayout
         android:orientation="vertical"
@@ -119,9 +119,15 @@
                 android:layout_height="wrap_content"
                 android:textAppearance="?android:attr/textAppearanceLarge"
                 android:id="@+id/kekka"
-                android:layout_column="42"
+                android:layout_column="44"
                 android:textSize="50dp"
                 android:text="result" />
+        </TableRow>
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
         </TableRow>
 
         <TableRow
@@ -160,7 +166,7 @@
                 android:text="EnemyLife"
                 android:id="@+id/textView2"
                 android:textSize="30dp"
-                android:layout_column="43" />
+                android:layout_column="44" />
         </TableRow>
 
         <TableRow
@@ -179,7 +185,7 @@
                 android:id="@+id/score"
                 android:layout_gravity="center_horizontal"
                 android:textSize="50sp"
-                android:layout_column="29" />
+                android:layout_column="32" />
 
             <TextView
                 android:layout_width="wrap_content"
@@ -188,8 +194,76 @@
                 android:id="@+id/enemy_life"
                 android:text="0000"
                 android:textSize="50dp"
-                android:layout_column="43" />
+                android:layout_column="45" />
         </TableRow>
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+        </TableRow>
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"></TableRow>
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"></TableRow>
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+        </TableRow>
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"></TableRow>
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"></TableRow>
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"></TableRow>
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"></TableRow>
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"></TableRow>
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"></TableRow>
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"></TableRow>
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"></TableRow>
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"></TableRow>
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"></TableRow>
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"></TableRow>
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"></TableRow>
 
         <TableRow
             android:layout_width="match_parent"
@@ -208,7 +282,7 @@
                 android:layout_height="wrap_content"
                 android:text="@string/home"
                 android:id="@+id/back_button"
-                android:layout_column="42" />
+                android:layout_column="45" />
         </TableRow>
     </TableLayout>
 

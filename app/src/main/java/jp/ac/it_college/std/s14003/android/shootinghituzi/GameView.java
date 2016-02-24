@@ -92,7 +92,7 @@ public class GameView extends SurfaceView implements SurfaceHolder.Callback{
         int width = canvas.getWidth();
         int height = canvas.getHeight();
 
-        canvas.drawColor(Color.WHITE);
+        canvas.drawColor(Color.LTGRAY);
 
         String TAG = "GameView";
         if (droid == null) {
