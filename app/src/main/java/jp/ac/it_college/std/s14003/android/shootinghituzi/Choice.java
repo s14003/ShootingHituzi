@@ -7,12 +7,13 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 
 public class Choice extends AppCompatActivity implements View.OnClickListener,GameView.Callback {
     private GameView gameView;
-    private Button maxButton;
-    private Button normalButton;
-    private Button easyButton;
+    private ImageView maxView;
+    private ImageView normalButton;
+    private ImageView easyButton;
     private int Max;
 
     @Override
@@ -24,20 +25,20 @@ public class Choice extends AppCompatActivity implements View.OnClickListener,Ga
         Max = preferences.getInt("MaxChangeKids", Max);
 
         if (Max == 1000) {
-            maxButton = (Button)findViewById(R.id.LevelMax_button);
-            maxButton.setOnClickListener(this);
-            normalButton = (Button)findViewById(R.id.LevelNormal_button);
+            maxView = (ImageView)findViewById(R.id.Max_button);
+            maxView.setOnClickListener(this);
+            normalButton = (ImageView)findViewById(R.id.Normal_button);
             normalButton.setOnClickListener(this);
-            easyButton = (Button) findViewById(R.id.LevelEasy_button);
+            easyButton = (ImageView) findViewById(R.id.Easy_button);
             easyButton.setOnClickListener(this);
 
         } else if (Max == 500 ) {
-            normalButton = (Button)findViewById(R.id.LevelNormal_button);
+            normalButton = (ImageView)findViewById(R.id.Normal_button);
             normalButton.setOnClickListener(this);
-            easyButton = (Button) findViewById(R.id.LevelEasy_button);
+            easyButton = (ImageView) findViewById(R.id.Easy_button);
             easyButton.setOnClickListener(this);
         } else if (Max == 50){
-            easyButton = (Button) findViewById(R.id.LevelEasy_button);
+            easyButton = (ImageView) findViewById(R.id.Easy_button);
             easyButton.setOnClickListener(this);
         }
     }
@@ -48,7 +49,7 @@ public class Choice extends AppCompatActivity implements View.OnClickListener,Ga
         SharedPreferences preferences = getSharedPreferences("MaxData", MODE_PRIVATE);
         Max = preferences.getInt("MaxChangeKids", Max);
 
-        if (maxButton == v) {
+        if (maxView == v) {
             gameView = new GameView(this,100);
             setContentView(gameView);
             gameView.setCallback(this);
