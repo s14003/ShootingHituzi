@@ -9,7 +9,7 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context="jp.ac.it_college.std.s14003.android.shootinghituzi.MainActivity"
     android:id="@+id/start"
-    android:background="@drawable/homeimage">
+    android:background="@drawable/homeimagekai">
 
     <TextView
         android:layout_width="wrap_content"

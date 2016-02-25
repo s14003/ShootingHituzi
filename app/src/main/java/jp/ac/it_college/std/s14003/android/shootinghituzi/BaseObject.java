@@ -16,6 +16,7 @@ public abstract class BaseObject {
         Bullet,
         Missile,
         Boss,
+        Recovery,
     }
 
     public abstract Type getType();

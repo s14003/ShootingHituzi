@@ -5,14 +5,15 @@ import android.graphics.Canvas;
 import android.graphics.Paint;
 import android.graphics.Rect;
 
-public class Missile extends BaseObject {
+
+public class Recovery extends BaseObject {
     private static final float SIZE = 10f;
     private final Paint paint = new Paint();
     public final Bitmap bitmap;
     public final float alignX;
     private Rect rect;
 
-    public Missile(Bitmap bitmap, int fromX, float alignX) {
+    public Recovery(Bitmap bitmap, int fromX, float alignX) {
         this.bitmap = bitmap;
         yPosition = 0;
         xPosition = fromX;
@@ -21,12 +22,12 @@ public class Missile extends BaseObject {
 
     @Override
     public Type getType() {
-        return Type.Missile;
+        return Type.Recovery;
     }
 
     @Override
     public boolean isHit(BaseObject object) {
-        if (object.getType() == Type.Missile) {
+        if (object.getType() == Type.Recovery || object.getType() == Type.Missile) {
             return false;
         }
         if (status == STATUS_DESTROYED) {
