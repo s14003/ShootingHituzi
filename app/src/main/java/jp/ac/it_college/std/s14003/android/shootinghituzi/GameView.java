@@ -89,9 +89,9 @@ public class GameView extends SurfaceView implements SurfaceHolder.Callback {
         int width = canvas.getWidth();
         int height = canvas.getHeight();
 
-        //Bitmap background = BitmapFactory.decodeResource(getResources(),R.drawable.test);
-        canvas.drawColor(Color.LTGRAY);
-        //canvas.drawBitmap(background,0,0,paint);
+        Bitmap background = BitmapFactory.decodeResource(getResources(),R.drawable.test);
+        //canvas.drawColor(Color.LTGRAY);
+        canvas.drawBitmap(background,0,0,paint);
 
         String TAG = "GameView";
         if (droid == null) {
@@ -134,7 +134,6 @@ public class GameView extends SurfaceView implements SurfaceHolder.Callback {
             BaseObject missile = missileList.get(i);
             for (int j = 0; j < bulletList.size(); j++) {
                 BaseObject bullet = bulletList.get(j);
-
                 if (bullet.isHit(missile)) {
                     if (missile.isHit(bullet)) {
                         missile.hit();
@@ -148,12 +147,9 @@ public class GameView extends SurfaceView implements SurfaceHolder.Callback {
         for (int i = 0; i < bulletList.size(); i++) {
             BaseObject bullet = bulletList.get(i);
             if (bullet.isHit(boss)) {
-                Log.d(TAG, "Bullet isHit boss is ok");
                     bullet.hit();
                     score += 10;
                     enemy_life -= 20;
-                    Log.d(TAG,"Score += 10");
-                    Log.d(TAG, "enemy_life = " + enemy_life);
                 if (enemy_life == 0) {
                     handler.post(new Runnable() {
                         @Override
@@ -171,12 +167,9 @@ public class GameView extends SurfaceView implements SurfaceHolder.Callback {
         for (int i = 0; i < missileList.size(); i++) {
             BaseObject missile = missileList.get(i);
             if (missile.isHit(droid)) {
-                Log.d(TAG,"missile isHit  droid is true");
-                    Log.d(TAG, "droid isHit  missile is true");
                     missile.hit();
                     life -= 10;
-                    Log.d(TAG,"life = " + life);
-                if (life == 0) {
+                if (life <= 0) {
                     handler.post(new Runnable() {
                         @Override
                         public void run() {
@@ -193,10 +186,18 @@ public class GameView extends SurfaceView implements SurfaceHolder.Callback {
         for (int i = 0; i < recoveryList.size();i++) {
             BaseObject recovery = recoveryList.get(i);
             if (recovery.isHit(droid)) {
-                if (droid.isHit(recovery)) {
-                    Log.d(TAG,"recovery is hit to droid");
-                    recovery.hit();
-                    life += 5;
+                Log.d(TAG,"recovery is hit to droid");
+                recovery.hit();
+                life += 5;
+                if (life <= 0) {
+                    handler.post(new Runnable() {
+                        @Override
+                        public void run() {
+                            droid.hit();
+                            callback.onGameOver(life, enemy_life);
+                        }
+                    });
+                    break;
                 }
             }
         }
